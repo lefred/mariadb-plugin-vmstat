@@ -1,0 +1,26 @@
+name: Build and package VMSTAT plugin
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: lefred/mariadb-plugin-ci/.github/workflows/build-plugin.yml@v1
+    with:
+      plugin-name: vmstat
+      plugin-directory: vmstat
+      build-target: vmstat
+      plugin-library: vmstat.so
+      cmake-options: -DPLUGIN_VMSTAT=DYNAMIC
+      test-suite: vmstat
+      run-tests: true
