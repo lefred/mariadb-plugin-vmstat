@@ -17,10 +17,10 @@ jobs:
   build:
     uses: lefred/mariadb-plugin-ci/.github/workflows/build-plugin.yml@v1
     with:
-      plugin-name: vmstat
-      plugin-directory: vmstat
-      build-target: vmstat
-      plugin-library: vmstat.so
-      cmake-options: -DPLUGIN_VMSTAT=DYNAMIC
-      test-suite: vmstat
-      run-tests: true
+      plugin_name: vmstat
+      plugin_directory: vmstat
+      build_target: vmstat
+      plugin_library: vmstat.so
+      cmake_options: -DPLUGIN_VMSTAT=DYNAMIC
+      test_suite: vmstat
+      run_tests: true
