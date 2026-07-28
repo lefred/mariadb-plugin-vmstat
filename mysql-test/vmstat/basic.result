@@ -1,0 +1,30 @@
+SELECT COUNT(*) > 0 AS have_cpu_rows
+FROM information_schema.VMSTAT_CPU;
+have_cpu_rows
+1
+SELECT COUNT(*) = 1 AS have_memory_row
+FROM information_schema.VMSTAT_MEM;
+have_memory_row
+1
+SELECT COUNT(*) > 0 AS have_disk_rows
+FROM information_schema.VMSTAT_DISK;
+have_disk_rows
+1
+SELECT COUNT(*) = 0 AS bad_cpu_names
+FROM information_schema.VMSTAT_CPU
+WHERE CPU NOT REGEXP '^cpu[0-9]*$';
+bad_cpu_names
+1
+SELECT MEM_TOT >= MEM_FREE AS sane_memory
+FROM information_schema.VMSTAT_MEM;
+sane_memory
+1
+CREATE USER vmstat_unprivileged@localhost;
+connect  unprivileged,localhost,vmstat_unprivileged,,;
+SELECT COUNT(*) = 0 AS process_privilege_required
+FROM information_schema.VMSTAT_CPU;
+process_privilege_required
+1
+disconnect unprivileged;
+connection default;
+DROP USER vmstat_unprivileged@localhost;
